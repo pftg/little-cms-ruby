@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -12,18 +13,22 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "little-cms"
-  gem.homepage = "http://github.com/pftg/little-cms"
-  gem.license = "MIT"
-  gem.summary = %Q{little CMS Engine}
+  gem.name        = "little-cms"
+  gem.homepage    = "http://github.com/pftg/little-cms"
+  gem.license     = "MIT"
+  gem.summary     = %Q{little CMS Engine}
   gem.description = %Q{Ruby wrpper to little CMS Engine}
-  gem.email = "pftg@jetthoughts.com"
-  gem.authors = ["Paul Nikitochkin"]
+  gem.email       = "pftg@jetthoughts.com"
+  gem.authors     = ["Paul Nikitochkin"]
+  gem.extensions  = FileList['ext/**/extconf.rb']
+
+  gem.files.include('lib/lcms.*')
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
+
 Jeweler::RubygemsDotOrgTasks.new
 
 require 'rspec/core'
@@ -34,7 +39,7 @@ end
 
 RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
+  spec.rcov    = true
 end
 
 require 'cucumber/rake/task'
@@ -43,8 +48,8 @@ Cucumber::Rake::Task.new(:features)
 require 'reek/rake/task'
 Reek::Rake::Task.new do |t|
   t.fail_on_error = true
-  t.verbose = false
-  t.source_files = 'lib/**/*.rb'
+  t.verbose       = false
+  t.source_files  = 'lib/**/*.rb'
 end
 
 require 'roodi'
@@ -57,10 +62,22 @@ task :default => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version       = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "little-cms #{version}"
+  rdoc.title    = "little-cms #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+
+require 'rake/extensiontask'
+require 'rake/extensiontesttask'
+
+Rake::ExtensionTask.new('lcms', $gemspec) do |ext|
+  ext.cross_compile  = true
+  ext.cross_platform = 'x86-mswin32'
+  #    ext.test_files      = FileList['test/c/*']
+end
+
+CLEAN.include 'lib/**/*.so'
