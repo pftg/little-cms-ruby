@@ -119,6 +119,8 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] term-ansicolor (v1.0.5, /Users/user/.rvm/gems/ree-1.8.7-2010.02/gems/term-ansicolor-1.0.5)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.7, /Users/user/.rvm/gems/ree-1.8.7-2010.02/gems/bundler-1.0.7)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.8.7, /Users/user/.rvm/gems/ree-1.8.7-2010.02/gems/rake-0.8.7)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rake-tester (v0.0.1, /Users/user/.rvm/gems/ree-1.8.7-2010.02/gems/rake-tester-0.0.1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rake-compiler (v0.7.6, /Users/user/.rvm/gems/ree-1.8.7-2010.02/gems/rake-compiler-0.7.6)" level="application" />
   </component>
 </module>
 

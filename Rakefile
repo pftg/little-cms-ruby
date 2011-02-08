@@ -75,8 +75,8 @@ require 'rake/extensiontask'
 require 'rake/extensiontesttask'
 
 Rake::ExtensionTask.new('lcms', $gemspec) do |ext|
-  ext.cross_compile  = true
-  ext.cross_platform = 'x86-mswin32'
+  ext.cross_compile  = false
+  #ext.cross_platform = 'x86-mswin32'
   #    ext.test_files      = FileList['test/c/*']
 end
 
